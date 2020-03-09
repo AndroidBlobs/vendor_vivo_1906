@@ -1,0 +1,28 @@
+on property:vendor.fingerprint.boot=goodix_3658
+    chown system system /dev/goodix_fp
+    chmod 0644 /dev/goodix_fp
+    enable biometrics-fingerprint-gf3658
+
+on post-fs-data && property:vendor.fingerprint.boot=goodix_3658
+    mkdir /data/vendor/fingerprint/gf3658 0775 system system
+
+on property:vendor.fingerprint.boot=goodix_5658
+    setprop persist.sys.fptype ${vendor.fingerprint.boot}
+	
+# Notified from gf3208-restart-counter-sh
+on property:sys.fingerprint.stop=biometrics-fingerprint-gf3658
+    stop biometrics-fingerprint-gf3658
+
+service biometrics-fingerprint-gf3658 /vendor/bin/hw/vendor.vivo.hardware.biometrics.fingerprint@2.1-service-gf3658
+    class late_start
+    user system
+    group system input sdcard_rw
+    onrestart restart gf3658-restart-counter-sh
+	disabled
+
+# Make sys.fingerprint.reboottimes +1
+service gf3658-restart-counter-sh /system/vendor/bin/sh /vendor/bin/init.vivo.fingerprint_restart_counter.sh biometrics-fingerprint-gf3658 5
+    user system
+    group system
+    disabled
+    oneshot
