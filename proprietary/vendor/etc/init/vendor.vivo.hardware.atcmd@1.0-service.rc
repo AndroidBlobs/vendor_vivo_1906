@@ -1,0 +1,17 @@
+service atcmd-hal-1-0 /vendor/bin/hw/vendor.vivo.hardware.atcmd@1.0-service
+    class hal
+    user root
+    group system
+#    disabled
+
+#on property:persist.sys.bbkem=1
+#    start atcmd-hal-1-0
+
+#on property:persist.sys.bbkem=2
+#    restart atcmd-hal-1-0
+
+#on property:persist.sys.bbkem=0
+#    stop atcmd-hal-1-0
+
+#on property:sys.emsvr.opt=1
+#    start atcmd-hal-1-0

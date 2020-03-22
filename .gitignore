@@ -1,0 +1,4 @@
+proprietary/vendor/lib64/libvivo3rd_sensetime.so
+proprietary/vendor/camera3rd/sensetime
+proprietary/vendor/camera3rd/sensetime/dualcapture.lic
+proprietary/vendor/camera3rd/sensetime/calibration.lic
